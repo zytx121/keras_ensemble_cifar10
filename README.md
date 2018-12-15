@@ -16,10 +16,7 @@ I just use **Keras** and **Tensorflow** to implementate all of these  models.
 
 ## Architectures and papers
 
-- The first CNN model: **LeNet**    
-    - [LeNet-5 - Yann LeCun][2]
-- **Network in Network**
-    - [Network In Network][3]
+
 - **Vgg19 Network**
     -  [Very Deep Convolutional Networks for Large-Scale Image Recognition][4]
     -  The **1st places** in ILSVRC 2014 localization tasks
@@ -46,15 +43,17 @@ I just use **Keras** and **Tensorflow** to implementate all of these  models.
     - [Squeeze-and-Excitation Networks][11]  
     - **The 1st places** in ILSVRC 2017 classification tasks 
 
+
+
 ## Documents & tutorials
 
 There are also some documents and tutorials in [doc][12] & [issues/3][13].  
 Get it if you need.   
-You can aslo see the [articles][14] if you can speak Chinese. <img src="https://user-images.githubusercontent.com/7837172/44953504-b9481000-aec8-11e8-9920-abf66365b8d8.gif">
+You can aslo see the [articles][14] if you can speak Chinese. 
 
 
 
-## Accuracy of all my implementations
+## Accuracy of all single models
 
 **In particular**：  
 Change the batch size according to your GPU's memory.  
@@ -77,8 +76,54 @@ Modify the learning rate schedule may imporve the results of accuracy!
 | ResNeXt-4x64d         | GTX1080TI | 20M     |   120      |  250  |   21 h 3 min  |    95.19    |
 | SENet(ResNeXt-4x64d)  | GTX1080TI | 20M     |   120      |  250  |   21 h 57 min |    95.60    |
 
+## Accuracy of all ensemble models 
 
-## About LeNet and CNN training tips/tricks
+**In particular**：  
+Change the batch size according to your GPU's memory.  
+Modify the learning rate schedule may imporve the results of accuracy!  
+
+#### voting
+
+
+| network               | GPU       | params  | batch size | epoch | training time | accuracy(%) |
+|:----------------------|:---------:|:-------:|:----------:|:-----:|:-------------:|:-----------:|
+| Lecun-Network         | GTX1080TI | 62k     |   128      |  200  |    30 min     |    76.23    |
+| Network-in-Network    | GTX1080TI | 0.97M   |   128      |  200  |    1 h 40 min |    91.63    |
+| Vgg19-Network         | GTX1080TI | 39M     |   128      |  200  |    1 h 53 min |    93.53    |
+| Residual-Network20    | GTX1080TI | 0.27M   |   128      |  200  |    44 min     |    91.82    |
+| Residual-Network32    | GTX1080TI | 0.47M   |   128      |  200  |    1 h 7 min  |    92.68    |
+| Residual-Network50    | GTX1080TI | 1.7M    |   128      |  200  |    1 h 42 min |    93.18    |
+| Residual-Network110   | GTX1080TI | 0.27M   |   128      |  200  |    3 h 38 min |    93.93    |
+| Wide-resnet 16x8      | GTX1080TI | 11.3M   |   128      |  200  |   4 h 55 min  |    95.13    |
+| Wide-resnet 28x10     | GTX1080TI | 36.5M   |   128      |  200  |   10 h 22 min |    95.78    |
+| DenseNet-100x12       | GTX1080TI | 0.85M   |   64       |  250  |   17 h 20 min |    94.91    |
+| DenseNet-100x24       | GTX1080TI | 3.3M    |   64       |  250  |   22 h 27 min |    95.30    |
+| DenseNet-160x24       | 1080 x 2  | 7.5M    |   64       |  250  |   50 h 20 min |    95.90    |
+| ResNeXt-4x64d         | GTX1080TI | 20M     |   120      |  250  |   21 h 3 min  |    95.19    |
+| SENet(ResNeXt-4x64d)  | GTX1080TI | 20M     |   120      |  250  |   21 h 57 min |    95.60    |
+
+
+#### weighted mean
+
+
+| network               | GPU       | params  | batch size | epoch | training time | accuracy(%) |
+|:----------------------|:---------:|:-------:|:----------:|:-----:|:-------------:|:-----------:|
+| Lecun-Network         | GTX1080TI | 62k     |   128      |  200  |    30 min     |    76.23    |
+| Network-in-Network    | GTX1080TI | 0.97M   |   128      |  200  |    1 h 40 min |    91.63    |
+| Vgg19-Network         | GTX1080TI | 39M     |   128      |  200  |    1 h 53 min |    93.53    |
+| Residual-Network20    | GTX1080TI | 0.27M   |   128      |  200  |    44 min     |    91.82    |
+| Residual-Network32    | GTX1080TI | 0.47M   |   128      |  200  |    1 h 7 min  |    92.68    |
+| Residual-Network50    | GTX1080TI | 1.7M    |   128      |  200  |    1 h 42 min |    93.18    |
+| Residual-Network110   | GTX1080TI | 0.27M   |   128      |  200  |    3 h 38 min |    93.93    |
+| Wide-resnet 16x8      | GTX1080TI | 11.3M   |   128      |  200  |   4 h 55 min  |    95.13    |
+| Wide-resnet 28x10     | GTX1080TI | 36.5M   |   128      |  200  |   10 h 22 min |    95.78    |
+| DenseNet-100x12       | GTX1080TI | 0.85M   |   64       |  250  |   17 h 20 min |    94.91    |
+| DenseNet-100x24       | GTX1080TI | 3.3M    |   64       |  250  |   22 h 27 min |    95.30    |
+| DenseNet-160x24       | 1080 x 2  | 7.5M    |   64       |  250  |   50 h 20 min |    95.90    |
+| ResNeXt-4x64d         | GTX1080TI | 20M     |   120      |  250  |   21 h 3 min  |    95.19    |
+| SENet(ResNeXt-4x64d)  | GTX1080TI | 20M     |   120      |  250  |   21 h 57 min |    95.60    |
+
+## About Focal Loss and Cross Entropy
 
 LeNet is the first CNN network proposed by LeCun.   
 I used different CNN training tricks to show you how to train your model efficiently.  
@@ -97,7 +142,7 @@ I used different CNN training tricks to show you how to train your model efficie
 
 For more CNN training tricks, see [Must Know Tips/Tricks in Deep Neural Networks][15] (by [Xiu-Shen Wei][16])
 
-## About Learning Rate schedule
+## About Ensemble Methods
 
 **Different learning rate schedule** may get **different training/testing accuracy!**  
 See **[./htd][17]**, and **[HTD][18]** for more details.  
@@ -122,11 +167,12 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 ```
 
 
-## About ResNeXt & DenseNet
+## About Cutout & AutoAugment
 
-Since I don't have enough machines to train the larger networks, I only trained the smallest network described in the paper.  You can see the results in [liuzhuang13/DenseNet][20] and [prlz77/ResNeXt.pytorch][21]
-
-<a href="https://bigballon.github.io">&nbsp;<img src="https://user-images.githubusercontent.com/7837172/44953504-b9481000-aec8-11e8-9920-abf66365b8d8.gif"></a> <a href="https://bigballon.github.io">&nbsp;<img src="https://user-images.githubusercontent.com/7837172/44953504-b9481000-aec8-11e8-9920-abf66365b8d8.gif"></a>
+-  **Cutout**
+    - [Improved Regularization of Convolutional Neural Networks with Cutout][22]   
+-  **AutoAugment**
+    - [AutoAugment: Learning Augmentation Policies from Data][23]  
 
 Please feel free to contact me if you have any questions! 
 
