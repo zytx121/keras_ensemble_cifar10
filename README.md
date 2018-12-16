@@ -1,12 +1,11 @@
 # keras_ensemble_cifar10
 
+This repository is supported by **Huawei** and **SJTU**. Thanks my girl friend!
 
-This repository is about some implementations of CNN Architecture  for **cifar10**.  
 
 ![cifar10][1]
 
-I just use **Keras** and **Tensorflow** to implementate all of these  models.  
-
+I just use **Keras** and **Tensorflow** to implementate all of these models and do some ensemble experiments based on [BIGBALLON's work][22].
 
 ## Requirements
 
@@ -198,3 +197,5 @@ Please feel free to contact me if you have any questions!
   [19]: https://keras.io/getting-started/faq/#how-can-i-run-a-keras-model-on-multiple-gpus
   [20]: https://github.com/liuzhuang13/DenseNet
   [21]: https://github.com/prlz77/ResNeXt.pytorch
+  [22]: https://github.com/prlz77/ResNeXt.pytorch
+  [22]: https://github.com/wangmin0199
