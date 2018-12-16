@@ -1,6 +1,6 @@
 # keras_ensemble_cifar10
 
-This repository is supported by **Huawei** and **SJTU**. Thanks my girl friend!
+This repository is supported by **Huawei** and **SJTU**. Thanks my girl friend.
 
 
 ![cifar10][1]
