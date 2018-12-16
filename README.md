@@ -1,6 +1,6 @@
 # keras_ensemble_cifar10
 
-This repository is supported by **Huawei** and **SJTU**. Thanks my girl friend.
+This repository is supported by **Huawei** and **SJTU**. 
 
 
 ![cifar10][1]
@@ -58,22 +58,17 @@ You can aslo see the [articles][14] if you can speak Chinese.
 Change the batch size according to your GPU's memory.  
 Modify the learning rate schedule may imporve the results of accuracy!  
 
-| network               | GPU       | params  | batch size | epoch | training time | accuracy(%) |
-|:----------------------|:---------:|:-------:|:----------:|:-----:|:-------------:|:-----------:|
-| Lecun-Network         | GTX1080TI | 62k     |   128      |  200  |    30 min     |    76.23    |
-| Network-in-Network    | GTX1080TI | 0.97M   |   128      |  200  |    1 h 40 min |    91.63    |
-| Vgg19-Network         | GTX1080TI | 39M     |   128      |  200  |    1 h 53 min |    93.53    |
-| Residual-Network20    | GTX1080TI | 0.27M   |   128      |  200  |    44 min     |    91.82    |
-| Residual-Network32    | GTX1080TI | 0.47M   |   128      |  200  |    1 h 7 min  |    92.68    |
-| Residual-Network50    | GTX1080TI | 1.7M    |   128      |  200  |    1 h 42 min |    93.18    |
-| Residual-Network110   | GTX1080TI | 0.27M   |   128      |  200  |    3 h 38 min |    93.93    |
-| Wide-resnet 16x8      | GTX1080TI | 11.3M   |   128      |  200  |   4 h 55 min  |    95.13    |
-| Wide-resnet 28x10     | GTX1080TI | 36.5M   |   128      |  200  |   10 h 22 min |    95.78    |
-| DenseNet-100x12       | GTX1080TI | 0.85M   |   64       |  250  |   17 h 20 min |    94.91    |
-| DenseNet-100x24       | GTX1080TI | 3.3M    |   64       |  250  |   22 h 27 min |    95.30    |
-| DenseNet-160x24       | 1080 x 2  | 7.5M    |   64       |  250  |   50 h 20 min |    95.90    |
-| ResNeXt-4x64d         | GTX1080TI | 20M     |   120      |  250  |   21 h 3 min  |    95.19    |
-| SENet(ResNeXt-4x64d)  | GTX1080TI | 20M     |   120      |  250  |   21 h 57 min |    95.60    |
+| network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
+|:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
+| Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   crossentropy |    4 h 55 min |    96.50    |
+| Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   focal_loss   |    6 h 34 min |    95.50    |
+| DenseNet-160x24       | GTX1080TI x 2 | 30.2M       |    64      |  250  |   crossentropy |   24 h 22 min |    95.70    |
+| DenseNet-160x24       | GTX1080TI x 2 | 30.2M       |    64      |  250  |   focal_loss   |   25 h 21 min |    95.60    |
+| ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   crossentropy |   26 h 07 min |    94.40    |
+| ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   focal_loss   |   35 h 10 min |    94.60    |
+| SENet(ResNeXt-4x64d)  | GTX1080TI x 2 | 80.2M       |   120      |  250  |   crossentropy |   25 h 38 min |    94.27    |
+
+
 
 ## Accuracy of all ensemble models 
 
@@ -84,43 +79,25 @@ Modify the learning rate schedule may imporve the results of accuracy!
 #### voting
 
 
-| network               | GPU       | params  | batch size | epoch | training time | accuracy(%) |
-|:----------------------|:---------:|:-------:|:----------:|:-----:|:-------------:|:-----------:|
-| Lecun-Network         | GTX1080TI | 62k     |   128      |  200  |    30 min     |    76.23    |
-| Network-in-Network    | GTX1080TI | 0.97M   |   128      |  200  |    1 h 40 min |    91.63    |
-| Vgg19-Network         | GTX1080TI | 39M     |   128      |  200  |    1 h 53 min |    93.53    |
-| Residual-Network20    | GTX1080TI | 0.27M   |   128      |  200  |    44 min     |    91.82    |
-| Residual-Network32    | GTX1080TI | 0.47M   |   128      |  200  |    1 h 7 min  |    92.68    |
-| Residual-Network50    | GTX1080TI | 1.7M    |   128      |  200  |    1 h 42 min |    93.18    |
-| Residual-Network110   | GTX1080TI | 0.27M   |   128      |  200  |    3 h 38 min |    93.93    |
-| Wide-resnet 16x8      | GTX1080TI | 11.3M   |   128      |  200  |   4 h 55 min  |    95.13    |
-| Wide-resnet 28x10     | GTX1080TI | 36.5M   |   128      |  200  |   10 h 22 min |    95.78    |
-| DenseNet-100x12       | GTX1080TI | 0.85M   |   64       |  250  |   17 h 20 min |    94.91    |
-| DenseNet-100x24       | GTX1080TI | 3.3M    |   64       |  250  |   22 h 27 min |    95.30    |
-| DenseNet-160x24       | 1080 x 2  | 7.5M    |   64       |  250  |   50 h 20 min |    95.90    |
-| ResNeXt-4x64d         | GTX1080TI | 20M     |   120      |  250  |   21 h 3 min  |    95.19    |
-| SENet(ResNeXt-4x64d)  | GTX1080TI | 20M     |   120      |  250  |   21 h 57 min |    95.60    |
+| Models                                                                                          | test_acc(%) |
+|:------------------------------------------------------------------------------------------------|:-----------:|
+| DenseNet-160x24 + Wide-ResNet 28x10                                                             | 96.10       |
+| DenseNet-160x24 + Wide-ResNet 28x10 + SENet(ResNeXt-4x64d)                                      | 96.38       |
+| DenseNet-160x24 + Wide-ResNet 28x10 + ResNeXt-29(8x64d) with focal loss + SENet(ResNeXt-4x64d)  | 96.38       |
+| DenseNet-160x24 + Wide-ResNet 28x10 + ResNeXt-29(8x64d) with focal loss                         | 96.52       |
 
 
 #### weighted mean
 
 
-| network               | GPU       | params  | batch size | epoch | training time | accuracy(%) |
-|:----------------------|:---------:|:-------:|:----------:|:-----:|:-------------:|:-----------:|
-| Lecun-Network         | GTX1080TI | 62k     |   128      |  200  |    30 min     |    76.23    |
-| Network-in-Network    | GTX1080TI | 0.97M   |   128      |  200  |    1 h 40 min |    91.63    |
-| Vgg19-Network         | GTX1080TI | 39M     |   128      |  200  |    1 h 53 min |    93.53    |
-| Residual-Network20    | GTX1080TI | 0.27M   |   128      |  200  |    44 min     |    91.82    |
-| Residual-Network32    | GTX1080TI | 0.47M   |   128      |  200  |    1 h 7 min  |    92.68    |
-| Residual-Network50    | GTX1080TI | 1.7M    |   128      |  200  |    1 h 42 min |    93.18    |
-| Residual-Network110   | GTX1080TI | 0.27M   |   128      |  200  |    3 h 38 min |    93.93    |
-| Wide-resnet 16x8      | GTX1080TI | 11.3M   |   128      |  200  |   4 h 55 min  |    95.13    |
-| Wide-resnet 28x10     | GTX1080TI | 36.5M   |   128      |  200  |   10 h 22 min |    95.78    |
-| DenseNet-100x12       | GTX1080TI | 0.85M   |   64       |  250  |   17 h 20 min |    94.91    |
-| DenseNet-100x24       | GTX1080TI | 3.3M    |   64       |  250  |   22 h 27 min |    95.30    |
-| DenseNet-160x24       | 1080 x 2  | 7.5M    |   64       |  250  |   50 h 20 min |    95.90    |
-| ResNeXt-4x64d         | GTX1080TI | 20M     |   120      |  250  |   21 h 3 min  |    95.19    |
-| SENet(ResNeXt-4x64d)  | GTX1080TI | 20M     |   120      |  250  |   21 h 57 min |    95.60    |
+| Models                                                                                           | test_acc(%) |
+|:-------------------------------------------------------------------------------------------------|:-----------:|
+| 0.6×Wide-ResNet 28x10 + 0.4×DenseNet-160x24                                                      | 96.38       |
+| 0.8×Wide-ResNet 28x10 + 0.8×DenseNet-160x24 + 0.4×ResNeXt-29(8x64d) with focal loss              | 96.53       |
+| 0.9×Wide-ResNet 28x10 +0.9×DenseNet-160x24 +0.2×SENet(ResNeXt-4x64d)                             | 96.47       |
+| Wide-ResNet 28x10 + DenseNet-160x24 + ResNeXt-29(8x64d) with focal loss + 0×SENet(ResNeXt-4x64d) | 96.15       |
+
+
 
 ## About Focal Loss and Cross Entropy
 
@@ -172,6 +149,10 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
     - [Improved Regularization of Convolutional Neural Networks with Cutout][22]   
 -  **AutoAugment**
     - [AutoAugment: Learning Augmentation Policies from Data][23]  
+    
+ ## Contributor   
+ 
+ 
 
 Please feel free to contact me if you have any questions! 
 
