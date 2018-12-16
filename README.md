@@ -58,6 +58,7 @@ You can aslo see the [articles][14] if you can speak Chinese.
 Change the batch size according to your GPU's memory.  
 Modify the learning rate schedule may imporve the results of accuracy!  
 
+
 | network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
 |:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
 | Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   crossentropy |    4 h 55 min |    96.50    |
@@ -68,7 +69,7 @@ Modify the learning rate schedule may imporve the results of accuracy!
 | ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   focal_loss   |   35 h 10 min |    94.60    |
 | SENet(ResNeXt-4x64d)  | GTX1080TI x 2 | 80.2M       |   120      |  250  |   crossentropy |   25 h 38 min |    94.27    |
 
-
+To avoid data leakage, I didn't calculate the accuracy in the test set.
 
 ## Accuracy of all ensemble models 
 
@@ -76,7 +77,7 @@ Modify the learning rate schedule may imporve the results of accuracy!
 Change the batch size according to your GPU's memory.  
 Modify the learning rate schedule may imporve the results of accuracy!  
 
-#### voting
+#### Voting
 
 
 | Models                                                                                          | test_acc(%) |
@@ -87,7 +88,7 @@ Modify the learning rate schedule may imporve the results of accuracy!
 | DenseNet-160x24 + Wide-ResNet 28x10 + ResNeXt-29(8x64d) with focal loss                         | 96.52       |
 
 
-#### weighted mean
+#### Weighted Mean
 
 
 | Models                                                                                           | test_acc(%) |
@@ -150,8 +151,9 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 -  **AutoAugment**
     - [AutoAugment: Learning Augmentation Policies from Data][23]  
     
- ## Contributor   
- 
+## Contributors
+
+<a href="https://github.com/wangmin0199"><img src="https://avatars1.githubusercontent.com/u/43812719?s=460&v=4" height="66px" width="66px"></a>
  
 
 Please feel free to contact me if you have any questions! 
