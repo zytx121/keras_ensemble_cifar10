@@ -45,9 +45,7 @@ I just use **Keras** and **Tensorflow** to implementate all of these models and 
 
 
 ## Documents & tutorials
-
-There are also some documents and tutorials in [doc][12] & [issues/3][13].  
-Get it if you need.   
+ 
 You can aslo see the [articles][14] if you can speak Chinese. 
 
 
@@ -102,22 +100,30 @@ Modify the learning rate schedule may imporve the results of accuracy!
 
 ## About Focal Loss and Cross Entropy
 
-LeNet is the first CNN network proposed by LeCun.   
-I used different CNN training tricks to show you how to train your model efficiently.  
+Reference to paper: [Focal Loss for Dense Object Detection][12]
+Code: [mutil-class focal loss implemented in keras][23] 
 
-``LeNet_keras.py`` is the baseline of LeNet,  
-``LeNet_dp_keras.py`` used the Data Prepossessing [DP],  
-``LeNet_dp_da_keras.py`` used both DP and the Data Augmentation[DA],  
-``LeNet_dp_da_wd_keras.py`` used DP, DA and Weight Decay [WD]  
+In addition to solving the extremely unbalanced positive-negative sample problem, focal loss can also solve the problem of easy example dominant. That's why I did the following experiment.
 
-| network                |  GPU      | DP      |     DA     |   WD  | training time | accuracy(%) |
-|:-----------------------|:---------:|:-------:|:----------:|:-----:|:-------------:|:-----------:|
-| LeNet_keras            | GTX1080TI |   -     |   -        |   -   |    5 min      |    58.48    |
-| LeNet_dp_keras         | GTX1080TI |   √     |   -        |   -   |    5 min      |    60.41    |
-| LeNet_dp_da_keras      | GTX1080TI |   √     |   √        |   -   |    26 min     |    75.06    |
-| LeNet_dp_da_wd_keras   | GTX1080TI |   √     |   √        |   √   |    26 min     |    76.23    |
 
-For more CNN training tricks, see [Must Know Tips/Tricks in Deep Neural Networks][15] (by [Xiu-Shen Wei][16])
+| network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
+|:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
+| Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   crossentropy |    4 h 55 min |    96.50    |
+| Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   focal_loss   |    6 h 34 min |    95.50    |
+
+
+| network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
+|:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
+| DenseNet-160x24       | GTX1080TI x 2 | 30.2M       |    64      |  250  |   crossentropy |   24 h 22 min |    95.70    |
+| DenseNet-160x24       | GTX1080TI x 2 | 30.2M       |    64      |  250  |   focal_loss   |   25 h 21 min |    95.60    |
+
+| network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
+|:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
+| ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   crossentropy |   26 h 07 min |    94.40    |
+| ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   focal_loss   |   35 h 10 min |    94.60    |
+
+We can see from the table above, focal loss improves the accuracy of Model ResNeXt-8x64d. But it reduces the accuracy of other models.
+
 
 ## About Ensemble Methods
 
@@ -147,13 +153,14 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 ## About Cutout & AutoAugment
 
 -  **Cutout**
-    - [Improved Regularization of Convolutional Neural Networks with Cutout][22]   
+    - [Improved Regularization of Convolutional Neural Networks with Cutout][24]   
 -  **AutoAugment**
-    - [AutoAugment: Learning Augmentation Policies from Data][23]  
+    - [AutoAugment: Learning Augmentation Policies from Data][25]  
     
 ## Contributors
 
 <a href="https://github.com/wangmin0199"><img src="https://avatars1.githubusercontent.com/u/43812719?s=460&v=4" height="66px" width="66px"></a>
+ 
  
 
 Please feel free to contact me if you have any questions! 
@@ -170,9 +177,9 @@ Please feel free to contact me if you have any questions!
   [9]: https://arxiv.org/abs/1703.06870
   [10]: https://arxiv.org/abs/1608.06993
   [11]: https://arxiv.org/abs/1709.01507
-  [12]: ./doc
+  [12]: https://arxiv.org/abs/1708.02002
   [13]: https://github.com/BIGBALLON/cifar-10-cnn/issues/3
-  [14]: https://zhuanlan.zhihu.com/dlgirls
+  [14]: https://zhuanlan.zhihu.com/p/52508690
   [15]: http://lamda.nju.edu.cn/weixs/project/CNNTricks/CNNTricks.html
   [16]: http://lamda.nju.edu.cn/weixs/
   [17]: ./htd
@@ -180,5 +187,5 @@ Please feel free to contact me if you have any questions!
   [19]: https://keras.io/getting-started/faq/#how-can-i-run-a-keras-model-on-multiple-gpus
   [20]: https://github.com/liuzhuang13/DenseNet
   [21]: https://github.com/prlz77/ResNeXt.pytorch
-  [22]: https://github.com/prlz77/ResNeXt.pytorch
   [22]: https://github.com/wangmin0199
+  [23]: https://github.com/maozezhong/focal_loss_multi_class
