@@ -217,18 +217,18 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 
 -  **Model of the second-place team (Test acc: 97.1%)**
     - Reference to paper: [Improved Regularization of Convolutional Neural Networks with Cutout][24]  
-    - Code: [Cutout][26]
+    - Pytorch Code: [Cutout][26]
 
 
 
 -  **Model of the first-place team (Test acc: 97.7%)**
     - Reference to paper: [AutoAugment: Learning Augmentation Policies from Data][25]  
-    - Code: [Autoaugment][27]
+    - Tensorflow Code: [Autoaugment][27]
     
 ## Contributors
 
 <a href="https://github.com/wangmin0199"><img src="https://avatars1.githubusercontent.com/u/43812719?s=460&v=4" height="66px" width="66px"></a>
- 
+<a href="https://github.com/Chenzf2018"><img src="https://avatars2.githubusercontent.com/u/40626787?s=400&v=4"></a>
  
 
 Please feel free to contact me if you have any questions! 
