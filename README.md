@@ -129,8 +129,61 @@ We can see from the table above, focal loss improves the accuracy of Model ResNe
 ## About Ensemble Methods
 
 ### Voting
+```python
+    models =[wresnet,densenet,resnext,senet]
+    labels = []
+    for m in models:
+        predicts = np.argmax(m.predict(x_test), axis=1)
+        labels.append(predicts)
 
+    # Ensemble with voting
+    labels = np.array(labels)
+    labels = np.transpose(labels, (1, 0))
+    labels = stats.mode(labels, axis=-1)[0]
+    labels = np.squeeze(labels)
+    error = np.sum(np.not_equal(labels, y_test1)) / y_test1.shape[0]  
+    print('The precision on test : ', 1-error)
+```
 ### Weighted Mean
+
+```python
+    # Predict labels with models
+    dense_layer_model1 = Model(inputs=wresnet.input,
+                                         outputs=wresnet.get_layer('dense_1').output)
+    dense_layer_model2 = Model(inputs=densenet.input,
+                                         outputs=densenet.get_layer('dense_1').output)
+    dense_layer_model3 = Model(inputs=resnext.input,
+                                         outputs=resnext.get_layer('dense_1').output)
+
+    dense_output1 = dense_layer_model1.predict(x_val)
+    dense_output2 = dense_layer_model2.predict(x_val)
+    dense_output3 = dense_layer_model3.predict(x_val)
+
+    best_error = 888
+    best_renpin1 = 666
+    best_renpin2 = 999
+
+    for renpin1 in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:  
+        for renpin2 in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:  
+            ams = (renpin1)*dense_output1+(renpin2)*dense_output2+(2-renpin1-renpin2)*dense_output3
+            predicts = np.argmax(ams, axis=1)
+            error = np.sum(np.not_equal(predicts, y_val1)) / y_val1.shape[0] 
+            print(" Precision: {} , renpin1: {} , renpin2: {}".format(1-error, renpin1, renpin2))
+            if error < best_error:
+                best_error = error
+                best_renpin1 = renpin1
+                best_renpin2 = renpin2
+    print("====================================================")            
+    print("Best precision: {} , renpin1:  {} , renpin2: {} ".format(1-best_error, best_renpin1, best_renpin2))
+    print("====================================================")
+    test_output1 = dense_layer_model1.predict(x_test)
+    test_output2 = dense_layer_model2.predict(x_test)
+    test_output3 = dense_layer_model3.predict(x_test)
+    ams1 = (best_renpin1)*test_output1+(best_renpin2)*test_output2+(2-best_renpin1-best_renpin2)*test_output3
+    predicts1 = np.argmax(ams1, axis=1)
+    error1 = np.sum(np.not_equal(predicts1, y_test1)) / y_test1.shape[0] 
+    print("Precision on test: {} , renpin1:  {} , renpin2: {} ".format(1-error1, best_renpin1, best_renpin2))
+```
 
 ## About [Multiple GPUs Training][19] 
 
@@ -155,8 +208,10 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 ## About Cutout & AutoAugment
 
 -  **Cutout**
+    - Model of the second-place team (acc:97.1%)
     - [Improved Regularization of Convolutional Neural Networks with Cutout][24]   
 -  **AutoAugment**
+    - Model of the first-place team (acc:97.7%)
     - [AutoAugment: Learning Augmentation Policies from Data][25]  
     
 ## Contributors
