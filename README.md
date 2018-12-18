@@ -291,9 +291,6 @@ Keras Applications are deep learning models that are made available alongside pr
 
     # start training
     start = time.time()
-    # parallel_model.fit(x_train, y_train,
-    #       epochs=epochs,steps_per_epoch=iterations, callbacks=cbks,
-    #       validation_data=(x_val, y_val),validation_steps=50)
     parallel_model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size), steps_per_epoch=iterations, epochs=epochs, callbacks=cbks,validation_data=(x_val, y_val))
 
     loss, accuracy = parallel_model.evaluate(x_test,y_test)
@@ -327,8 +324,6 @@ Keras Applications are deep learning models that are made available alongside pr
 
     # set callback
     tb_cb     = TensorBoard(log_dir='./Inception_finetune/', histogram_freq=0)                                   # tensorboard log
-    # change_lr = LearningRateScheduler(scheduler)                                                    # learning rate scheduler
-    # ckpt      = ModelCheckpoint('./ckpt_inception.h5', save_best_only=True, mode='auto', period=1)    # checkpoint 
     cbks      = [tb_cb]                   
 
     # set data augmentation
@@ -340,9 +335,6 @@ Keras Applications are deep learning models that are made available alongside pr
 
     # start training
     start = time.time()
-    # parallel_model.fit(x_train, y_train,
-    #       epochs=epochs,steps_per_epoch=iterations, callbacks=cbks,
-    #       validation_data=(x_val, y_val),validation_steps=50)
     parallel_model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size), steps_per_epoch=iterations, epochs=epochs1, callbacks=cbks,validation_data=(x_val, y_val))
 
     loss, accuracy = parallel_model.evaluate(x_test,y_test)
