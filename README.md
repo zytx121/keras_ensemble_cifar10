@@ -75,7 +75,7 @@ To avoid data leakage, I didn't calculate the accuracy in the test set.
 Change the batch size according to your GPU's memory.  
 Modify the learning rate schedule may imporve the results of accuracy!  
 
-#### Voting
+### Voting
 
 
 | Models                                                                                          | test_acc(%) |
@@ -86,7 +86,7 @@ Modify the learning rate schedule may imporve the results of accuracy!
 | DenseNet-160x24 + Wide-ResNet 28x10 + ResNeXt-29(8x64d) with focal loss                         | 96.52       |
 
 
-#### Weighted Mean
+### Weighted Mean
 
 
 | Models                                                                                           | test_acc(%) |
@@ -105,18 +105,19 @@ Code: [mutil-class focal loss implemented in keras][23]
 
 In addition to solving the extremely unbalanced positive-negative sample problem, focal loss can also solve the problem of easy example dominant. That's why I did the following experiment.
 
-
+### Wide-resnet 28x10
 | network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
 |:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
 | Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   crossentropy |    4 h 55 min |    96.50    |
 | Wide-resnet 28x10     | GTX1080TI x 2 |  139M       |   128      |  250  |   focal_loss   |    6 h 34 min |    95.50    |
 
-
+### DenseNet-160x24
 | network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
 |:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
 | DenseNet-160x24       | GTX1080TI x 2 | 30.2M       |    64      |  250  |   crossentropy |   24 h 22 min |    95.70    |
 | DenseNet-160x24       | GTX1080TI x 2 | 30.2M       |    64      |  250  |   focal_loss   |   25 h 21 min |    95.60    |
 
+### ResNeXt-8x64d
 | network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
 |:----------------------|:-------------:|:-----------:|:----------:|:-----:|:--------------:|:-------------:|:-----------:|
 | ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   crossentropy |   26 h 07 min |    94.40    |
@@ -127,8 +128,9 @@ We can see from the table above, focal loss improves the accuracy of Model ResNe
 
 ## About Ensemble Methods
 
-**Different learning rate schedule** may get **different training/testing accuracy!**  
-See **[./htd][17]**, and **[HTD][18]** for more details.  
+### Voting
+
+### Weighted Mean
 
 ## About [Multiple GPUs Training][19] 
 
@@ -189,3 +191,5 @@ Please feel free to contact me if you have any questions!
   [21]: https://github.com/prlz77/ResNeXt.pytorch
   [22]: https://github.com/wangmin0199
   [23]: https://github.com/maozezhong/focal_loss_multi_class
+  [24]: https://arxiv.org/abs/1708.04552
+  [25]: https://arxiv.org/abs/1805.09501
