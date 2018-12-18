@@ -72,8 +72,7 @@ To avoid data leakage, I didn't calculate the accuracy in the test set.
 ## Accuracy of all ensemble models 
 
 **In particular**：  
-Change the batch size according to your GPU's memory.  
-Modify the learning rate schedule may imporve the results of accuracy!  
+I first tune in the verification set, determine the parameters. 
 
 ### Voting
 
@@ -147,6 +146,10 @@ We can see from the table above, focal loss improves the accuracy of Model ResNe
 ### Weighted Mean
 
 ```python
+import numpy as np
+from scipy import stats
+import pandas as pd
+
     # Predict labels with models
     dense_layer_model1 = Model(inputs=wresnet.input,
                                          outputs=wresnet.get_layer('dense_1').output)
