@@ -1,6 +1,8 @@
 # keras_ensemble_cifar10
 
-This repository is supported by **Huawei** and **SJTU**. 
+This repository is supported by **Huawei (HCNA-AI Certification Course)** and **Student Innovation Center of SJTU**.  
+Thanks to the teachers for their contributions. Especially **Mr. Jiang Yonghong**.  
+Thanks to the GPU computing platform (Composed of **100 pieces of 1080Ti**) provided by the Student Innovation Center.
 
 
 ![cifar10][1]
