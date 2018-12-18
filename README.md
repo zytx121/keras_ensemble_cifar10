@@ -1,9 +1,8 @@
 # keras_ensemble_cifar10
 
 This repository is supported by **Huawei (HCNA-AI Certification Course)** and **Student Innovation Center of SJTU**.  
+Thanks to the GPU computing platform (Composed of **100 pieces of 1080Ti**) provided by the Student Innovation Center.  
 Thanks to the teachers for their contributions. Especially **Mr. Jiang Yonghong**.  
-Thanks to the GPU computing platform (Composed of **100 pieces of 1080Ti**) provided by the Student Innovation Center.
-
 
 ![cifar10][1]
 
@@ -219,13 +218,13 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 
 -  **Model of the second-place team (Test acc: 97.1%)**
     - Reference to paper: [Improved Regularization of Convolutional Neural Networks with Cutout][24]  
-    - Pytorch Code: [Cutout][26]
+    - Code: [Cutout (Pytorch)][26]
 
 
 
 -  **Model of the first-place team (Test acc: 97.7%)**
     - Reference to paper: [AutoAugment: Learning Augmentation Policies from Data][25]  
-    - Tensorflow Code: [Autoaugment][27]
+    - Code: [Autoaugment (Tensorflow)][27]
     
 ## Contributors
 
