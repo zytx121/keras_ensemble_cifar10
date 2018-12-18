@@ -342,7 +342,7 @@ Keras Applications are deep learning models that are made available alongside pr
     print('accuracy',accuracy)
     end = time.time()
     print('fine tune time',end-start)  
-    senet.save('finetune_inceptionV3.h5')
+    model.save('finetune_inceptionV3.h5')
 ```
 
 Because the input size for InceptionV3 should be no smaller than 75×75, I resize the pictures from 32×32 to 96×96.
