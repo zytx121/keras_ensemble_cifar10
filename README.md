@@ -359,6 +359,7 @@ Frankly, I didn't get good results because I didn't have enough time to fine tun
 ## About Hard Examples
 
 Here are some images that our model does not correctly predict.
+
 ![cifar10][29]
 
 ## About Cutout & AutoAugment
