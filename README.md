@@ -228,7 +228,7 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 ## Contributors
 
 <a href="https://github.com/wangmin0199"><img src="https://avatars1.githubusercontent.com/u/43812719?s=460&v=4" height="66px" width="66px"></a>
-<a href="https://github.com/Chenzf2018"><img src="https://avatars2.githubusercontent.com/u/40626787?s=400&v=4"></a>
+<a href="https://github.com/Chenzf2018"><img src="https://avatars2.githubusercontent.com/u/40626787?s=400&v=4"  height="66px" width="66px"></a>
  
 
 Please feel free to contact me if you have any questions! 
