@@ -68,12 +68,13 @@ Thanks to the GPU computing platform (Composed of **100 pieces of 1080Ti**) prov
 | ResNeXt-8x64d         | GTX1080TI x 2 |  142M       |   120      |  250  |   focal_loss   |   35 h 10 min |    94.60    |
 | SENet(ResNeXt-4x64d)  | GTX1080TI x 2 | 80.2M       |   120      |  250  |   crossentropy |   25 h 38 min |    94.27    |
 
-To avoid data leakage, I didn't calculate the accuracy in the test set.
+I didn't calculate the accuracy in the test set. As the author of keras said, every time you use feedback from your validation process to tune your model, you leak information about the validation process into the model. Repeated just a few times, this is innocuous; but done systematically over many iterations, it will eventually cause your model to overfit to the validation process (even though no model is directly trained on any of the validation data). This makes the evaluation process less reliable.
+
 
 ## Accuracy of all ensemble models 
 
 **In particular**：  
-I first tune in the validation set, determine the parameters. 
+I first tune in the validation set, determine the parameters of models. 
 
 ### Voting
 
@@ -100,8 +101,7 @@ I first tune in the validation set, determine the parameters.
 
 ## About Focal Loss and Cross Entropy
 
-Reference to paper: [Focal Loss for Dense Object Detection][12]
-
+Reference to paper: [Focal Loss for Dense Object Detection][12]  
 Code: [mutil-class focal loss implemented in keras][23] 
 
 In addition to solving the extremely unbalanced positive-negative sample problem, focal loss can also solve the problem of easy example dominant. That's why I did the following experiment.
@@ -213,6 +213,17 @@ parallel_model.compile(loss='categorical_crossentropy',optimizer='adam')
 parallel_model.fit(x, y, epochs=20, batch_size=256)
 ```
 
+## About [Transfer Learning (fine tune)][28]
+
+| Models                                                                                           | test_acc(%)    |
+|:-------------------------------------------------------------------------------------------------|:--------------:|
+| VGG19 (Pre-trained on ImageNet)                                                                  | 75.24          |
+| InceptionV3 (Pre-trained on ImageNet)                                                            | No time to run |
+
+
+## About Hard Examples
+
+![cifar10][29]
 
 ## About Cutout & AutoAugment
 
@@ -226,6 +237,10 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
     - Reference to paper: [AutoAugment: Learning Augmentation Policies from Data][25]  
     - Code: [Autoaugment (Tensorflow)][27]
     
+    
+    
+   
+   
 ## Contributors
 
 <a href="https://github.com/wangmin0199"><img src="https://avatars1.githubusercontent.com/u/43812719?s=460&v=4" height="66px" width="66px"></a>
@@ -262,3 +277,5 @@ Please feel free to contact me if you have any questions!
   [25]: https://arxiv.org/abs/1805.09501
   [26]: https://github.com/uoguelph-mlrg/Cutout
   [27]: https://github.com/tensorflow/models/tree/master/research/autoaugment
+  [28]: https://github.com/tensorflow/models/tree/master/research/autoaugment
+  [29]: ./5.Others/picture/error_pic1.png
