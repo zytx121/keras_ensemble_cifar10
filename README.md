@@ -345,6 +345,9 @@ Keras Applications are deep learning models that are made available alongside pr
     senet.save('finetune_inceptionV3.h5')
 ```
 
+Because the input size for InceptionV3 should be no smaller than 75*75, I resize the pictures from 32*32 to 96*96.
+
+
 | Models                                                                                           | test_acc(%)    |
 |:-------------------------------------------------------------------------------------------------|:--------------:|
 | VGG19 (Pre-trained on ImageNet)                                                                  | 75.24          |
@@ -355,6 +358,7 @@ Frankly, I didn't get good results because I didn't have enough time to fine tun
 
 ## About Hard Examples
 
+Here are some images that our model does not correctly predict.
 ![cifar10][29]
 
 ## About Cutout & AutoAugment
