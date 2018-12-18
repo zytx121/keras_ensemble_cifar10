@@ -1,7 +1,6 @@
 # keras_ensemble_cifar10
 
 This repository is supported by **Huawei (HCNA-AI Certification Course)** and **Student Innovation Center of SJTU**.  
-Thanks to the GPU computing platform (Composed of **100 pieces of 1080Ti**) provided by the Student Innovation Center.  
 Thanks to the teachers for their contributions. Especially **Mr. Jiang Yonghong**.  
 
 ![cifar10][1]
@@ -56,6 +55,7 @@ You can aslo see the [articles][14] if you can speak Chinese.
 **In particular**：  
 Change the batch size according to your GPU's memory.  
 Modify the learning rate schedule may imporve the results of accuracy!  
+Thanks to the GPU computing platform (Composed of **100 pieces of 1080Ti**) provided by the Student Innovation Center. 
 
 
 | network               | GPU           | model size  | batch size | epoch | loss function  | training time | val_acc(%)  |
