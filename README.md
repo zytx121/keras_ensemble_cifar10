@@ -217,7 +217,7 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 
 Keras Applications are deep learning models that are made available alongside pre-trained weights. These models can be used for prediction, feature extraction, and fine-tuning.
 
-### Fine-tune InceptionV3 on C
+### Fine-tune InceptionV3 on CIFAR-10
 ```python
     x_train, y_train, x_val, y_val, x_test, y_test = get_CIFAR10_data()
     
@@ -345,7 +345,7 @@ Keras Applications are deep learning models that are made available alongside pr
     senet.save('finetune_inceptionV3.h5')
 ```
 
-Because the input size for InceptionV3 should be no smaller than 75*75, I resize the pictures from 32*32 to 96*96.
+Because the input size for InceptionV3 should be no smaller than 75×75, I resize the pictures from 32×32 to 96×96.
 
 
 | Models                                                                                           | test_acc(%)    |
