@@ -72,7 +72,7 @@ To avoid data leakage, I didn't calculate the accuracy in the test set.
 ## Accuracy of all ensemble models 
 
 **In particular**：  
-I first tune in the verification set, determine the parameters. 
+I first tune in the validation set, determine the parameters. 
 
 ### Voting
 
@@ -100,6 +100,7 @@ I first tune in the verification set, determine the parameters.
 ## About Focal Loss and Cross Entropy
 
 Reference to paper: [Focal Loss for Dense Object Detection][12]
+
 Code: [mutil-class focal loss implemented in keras][23] 
 
 In addition to solving the extremely unbalanced positive-negative sample problem, focal loss can also solve the problem of easy example dominant. That's why I did the following experiment.
@@ -129,6 +130,10 @@ We can see from the table above, focal loss improves the accuracy of Model ResNe
 
 ### Voting
 ```python
+    import numpy as np
+    from scipy import stats
+    import pandas as pd
+
     models =[wresnet,densenet,resnext,senet]
     labels = []
     for m in models:
@@ -146,9 +151,9 @@ We can see from the table above, focal loss improves the accuracy of Model ResNe
 ### Weighted Mean
 
 ```python
-import numpy as np
-from scipy import stats
-import pandas as pd
+    import numpy as np
+    from scipy import stats
+    import pandas as pd
 
     # Predict labels with models
     dense_layer_model1 = Model(inputs=wresnet.input,
@@ -210,12 +215,15 @@ parallel_model.fit(x, y, epochs=20, batch_size=256)
 
 ## About Cutout & AutoAugment
 
--  **Cutout**
-    - Model of the second-place team (acc:97.1%)
-    - [Improved Regularization of Convolutional Neural Networks with Cutout][24]   
--  **AutoAugment**
-    - Model of the first-place team (acc:97.7%)
-    - [AutoAugment: Learning Augmentation Policies from Data][25]  
+-  **Model of the second-place team (Test acc: 97.1%)**
+    - Reference to paper: [Improved Regularization of Convolutional Neural Networks with Cutout][24]  
+    - Code: [Cutout][26]
+
+
+
+-  **Model of the first-place team (Test acc: 97.7%)**
+    - Reference to paper: [AutoAugment: Learning Augmentation Policies from Data][25]  
+    - Code: [Autoaugment][27]
     
 ## Contributors
 
@@ -251,3 +259,5 @@ Please feel free to contact me if you have any questions!
   [23]: https://github.com/maozezhong/focal_loss_multi_class
   [24]: https://arxiv.org/abs/1708.04552
   [25]: https://arxiv.org/abs/1805.09501
+  [26]: https://github.com/uoguelph-mlrg/Cutout
+  [27]: https://github.com/tensorflow/models/tree/master/research/autoaugment
